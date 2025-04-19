@@ -1,0 +1,47 @@
+/*
+ * LED_Effects.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+uint8_t current_led_number = 0;
+uint8_t effect = 2;
+
+void led_swap_forward_and_Reverse(int i) {
+    static int previous = -1;
+
+    // Turn off the previous LED if valid
+    if (previous >= 0 && previous <= 8) {
+        Write_GPIO(portC, previous, 0);
+    }
+
+    // Turn on the current LED
+    Write_GPIO(portC, i, 1);
+
+    // Save current LED as previous for next round
+    previous = i;
+}
+
+void led_timer_callback (TimerHandle_t xTimer){
+	if (effect == 1){
+		led_swap_forward_and_Reverse (current_led_number);
+		current_led_number = (current_led_number+1) % led_numbers;
+	}
+
+	else if (effect == 2){
+		led_swap_forward_and_Reverse (current_led_number);
+		if (current_led_number == 0){
+		   current_led_number = led_numbers - 1;
+		}else{
+		   current_led_number--;
+		}
+	}
+}

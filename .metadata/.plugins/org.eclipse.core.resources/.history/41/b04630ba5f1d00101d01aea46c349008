@@ -1,0 +1,54 @@
+/*
+ * Task_Handler.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "timers.h"
+
+void Command_Task_Handler(void* parameters){
+	//BaseType_t returnValue;
+	uint8_t command;
+
+	while (1){
+		//initially it is blocked using notify wait. If notification is sent, it will unblock and ready to run
+		 xTaskNotifyWait(0,0, NULL,portMAX_DELAY );
+
+		 if (xQueueReceive(q_data, &command, 0) == pdPASS){
+			 if (command >= '0' && command <= '5'){
+				 uint8_t cmd_num = command - '0';
+				 effect = cmd_num;
+
+				 if (cmd_num <= 4) {
+				      xTaskNotify(led_task_Handle, 0, eNoAction);
+				   }
+			 }
+
+		 }
+
+
+	}
+}
+
+void LED_Task_Handler(void* parameters){
+
+	while (1){
+		xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+		if (effect == 0){
+			xTimerStop(handle_led_timer, 0);
+			led_stop ();
+		}
+
+		else {
+			xTimerStart(handle_led_timer, 0);
+		}
+	}
+
+}

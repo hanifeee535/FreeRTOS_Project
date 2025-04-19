@@ -1,0 +1,55 @@
+/*
+ * menue_handler.c
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+
+
+
+ void (Menu_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (Command_Task_Handler) (void* parameters) {
+
+	while (1){
+		//initially it is blocked using notify wait. If notification is sent, it will unblock and ready to run
+		xTaskNotifyWait(0,0, NULL,portMAX_DELAY );
+
+		//when notification is received or gets the command from the usart, it will process the data
+
+		//Notify the relevant task according to the command
+
+	}
+	}
+
+ void (Print_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (LED_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (RTC_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}

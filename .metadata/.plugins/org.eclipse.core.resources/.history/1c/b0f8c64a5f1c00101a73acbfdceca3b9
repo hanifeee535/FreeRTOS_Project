@@ -1,0 +1,64 @@
+/*
+ * main.h
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+
+TaskHandle_t menu_task_Handle;
+TaskHandle_t commmand_task_Handle;
+TaskHandle_t print_task_Handle;
+TaskHandle_t led_task_Handle;
+TaskHandle_t rtc_task_Handle;
+
+QueueHandle_t q_data;
+QueueHandle_t q_print;
+
+TaskHandle_t volatile NextTask_To_Handle = NULL;
+BaseType_t status;
+
+const char *msg_invalid = "/////Invalid Message /////";
+
+typedef enum {
+	sMainMenu = 0,
+	sLEDEffect,
+	sRTCReport,
+	sRTCMenu,
+	sRTCTimeConfig,
+	sRTCDateConfig,
+
+}state_t;
+
+
+//state variable
+state_t current_state = sMainMenu;
+
+
+typedef struct {
+	uint8_t payload [10];
+	uint32_t len;
+
+}command_t;
+
+
+
+ void (Menu_Task_Handler) (void* parameters);
+ void (Command_Task_Handler) (void* parameters);
+ void (Print_Task_Handler) (void* parameters);
+ void (LED_Task_Handler) (void* parameters);
+ void (RTC_Task_Handler) (void* parameters);
+ void led_effect_stop();
+ void led_effect_1();
+ void led_effect_2();
+ void led_effect_3();
+ void led_effect_4();
+
+
+

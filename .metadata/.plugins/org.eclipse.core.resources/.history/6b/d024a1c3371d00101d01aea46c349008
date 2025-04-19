@@ -1,0 +1,22 @@
+/*
+ * main.h
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+
+void led_swap_forward_and_Reverse(int i);
+
+
+#endif /* MAIN_H_ */

@@ -1,0 +1,19 @@
+/*
+ * main.h
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+
+ void (Menu_Task_Handler) (void* parameters);
+ void (Command_Task_Handler) (void* parameters);
+ void (Print_Task_Handler) (void* parameters);
+ void (LED_Task_Handler) (void* parameters);
+ void (RTC_Task_Handler) (void* parameters);

@@ -1,0 +1,21 @@
+01:00:32 **** Incremental Build of configuration Debug for project 003_LED_Effect_Using_SW_Timer_and_USART ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/Task_Handler.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32F103RBTx -DSTM32 -DSTM32F1 -DNUCLEO_F103RB -c -I../Inc -I"D:/Embedded_C/FreeRTOS_STM32f103/003_LED_Effect_Using_SW_Timer_and_USART/Src" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_LED_Effect_Using_SW_Timer_and_USART/Drivers" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_LED_Effect_Using_SW_Timer_and_USART/Third_Party/FreeRTOS" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_LED_Effect_Using_SW_Timer_and_USART/Third_Party/FreeRTOS/include" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_LED_Effect_Using_SW_Timer_and_USART/Third_Party/FreeRTOS/portable/GCC/ARM_CM3" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/Task_Handler.d" -MT"Src/Task_Handler.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/Task_Handler.o"
+arm-none-eabi-gcc -o "003_LED_Effect_Using_SW_Timer_and_USART.elf" @"objects.list"   -mcpu=cortex-m3 -T"D:\Embedded_C\FreeRTOS_STM32f103\003_LED_Effect_Using_SW_Timer_and_USART\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="003_LED_Effect_Using_SW_Timer_and_USART.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 003_LED_Effect_Using_SW_Timer_and_USART.elf
+ 
+arm-none-eabi-size  003_LED_Effect_Using_SW_Timer_and_USART.elf 
+arm-none-eabi-objdump -h -S 003_LED_Effect_Using_SW_Timer_and_USART.elf  > "003_LED_Effect_Using_SW_Timer_and_USART.list"
+   text	   data	    bss	    dec	    hex	filename
+  19320	     52	  14244	  33616	   8350	003_LED_Effect_Using_SW_Timer_and_USART.elf
+Finished building: default.size.stdout
+ 
+Finished building: 003_LED_Effect_Using_SW_Timer_and_USART.list
+ 
+01:00:38 **** Incremental Build of configuration Debug for project 003_LED_Effect_Using_SW_Timer_and_USART ****
+make -j12 all 
+arm-none-eabi-size  003_LED_Effect_Using_SW_Timer_and_USART.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19320	     52	  14244	  33616	   8350	003_LED_Effect_Using_SW_Timer_and_USART.elf
+Finished building: default.size.stdout
+ 

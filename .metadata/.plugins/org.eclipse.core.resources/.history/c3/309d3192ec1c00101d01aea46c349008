@@ -1,0 +1,21 @@
+/*
+ * led_effect.c
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+
+ void led_effect_stop(){
+	 for (int i = 0; i<4; i++){
+	     	 xTimerStop("LED timer", pdMS_TO_TICKS(500), pdTRUE (void*)(i+1), led_timer_callback  );
+	     }
+
+ }
+ void led_effect(int n){
+	 led_effect_stop();
+	 xTimerStart (handle_led_timer[n-1], portMAX_DELAY);
+
+
+ }
+

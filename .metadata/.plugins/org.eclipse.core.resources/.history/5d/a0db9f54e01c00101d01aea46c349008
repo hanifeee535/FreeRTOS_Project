@@ -1,0 +1,190 @@
+/*
+ * menue_handler.c
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+
+
+uint32_t extract_command (command_t *cmd){
+	uint8_t item;
+	BaseType_t status;
+
+	status = uxQueueMessagesWaiting (q_data);
+	if (!status) return -1;
+	uint8_t i = 0;
+
+	do {
+		status = xQueueReceive (q_data, &item, 0);
+		if (status == pdTRUE) cmd->payload[i++] = item;
+	} while (item != '\n');
+
+	cmd->payload[i-1] = '\0';
+	cmd->len = i-1; //save the length of the command excluding null char
+	return 0;
+}
+
+
+
+
+void Process_Command (command_t *cmd){
+	extract_command (cmd);
+	switch (current_state){
+	case sMainMenu:
+		xTaskNotify (menu_task_Handle, (uint32_t) cmd , eSetValueWithOverwrite);
+	break;
+
+	case sLEDEffect:
+		xTaskNotify (led_task_Handle, (uint32_t) cmd , eSetValueWithOverwrite);
+
+	break;
+
+	case sRTCReport:
+		xTaskNotify (rtc_task_Handle, (uint32_t) cmd , eSetValueWithOverwrite);
+
+		break;
+
+	case sRTCMenu:
+
+		break;
+
+	case sRTCTimeConfig:
+
+			break;
+
+	case sRTCDateConfig:
+
+			break;
+
+
+	}
+
+
+
+}
+
+
+
+
+ void (Menu_Task_Handler) (void* parameters) {
+	 uint32_t cmd_addr;
+	 command_t * cmd;
+	 uint32_t option;
+	 const char * msg_menu =  "================\n"
+			 	 	 	 	 "|		Menu	  |\n"
+			 	 	 	 	  "================\n"
+			 	 	 	 	 	 "LED Effect 	 -----> 0 \n"
+			 	 	 	 	 	 "Date and Time  -----> 1 \n"
+			 	 	 	 	 	 "Exit  		 -----> 2 \n"
+			 	 	 	 	 	 "Enter your Choice here: " ;
+	while (1){
+		xQueueSend (q_print, &msg_menu, portMAX_DELAY);
+		xTaskNotifyWait(0,0, &cmd_addr,portMAX_DELAY );
+		cmd = (command_t *) cmd_addr;
+
+		if (cmd ->len ==1) {
+			option = cmd->payload[0] - 48;
+			switch (option){
+			case 0:
+				current_state = sLEDEffect;
+				xTaskNotify(led_task_Handle,0, eNoAction );
+
+			case 1:
+				current_state = sRTCMenu;
+				xTaskNotify(rtc_task_Handle,0, eNoAction );
+
+			case 2:
+				//current_state = sRTCMenu;
+				//xTaskNotify(rtc_task_Handle,0, eNoAction );
+				break;
+			default:
+				xQueueSend (q_print, &msg_invalid, portMAX_DELAY);
+				continue;
+			}
+
+		}
+		else {
+			xQueueSend (q_print, &msg_invalid, portMAX_DELAY);
+		}
+
+		xTaskNotifyWait(0,0,NULL,portMAX_DELAY );
+
+	}
+	}
+
+
+ void (Command_Task_Handler) (void* parameters) {
+	 BaseType_t returnValue;
+
+	 command_t cmd;
+
+	while (1){
+		//initially it is blocked using notify wait. If notification is sent, it will unblock and ready to run
+		returnValue= xTaskNotifyWait(0,0, NULL,portMAX_DELAY );
+
+		//when notification is received or gets the command from the usart, it will process the data
+		if (returnValue == pdTRUE){
+			Process_Command (&cmd);
+		}
+
+		//Notify the relevant task according to the command
+
+	}
+	}
+
+ void (Print_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (LED_Task_Handler) (void* parameters) {
+
+	 uint32_t cmd_addr;
+	 command_t * cmd;
+	 const char * msg_led =  "================\n"
+			 	 	 	 	 "|	   LED Effect |\n"
+			 	 	 	 	  "================\n"
+			 	 	 	 	 	 "(none, e1, e2, e3, e4)\n"
+			 			 	 	"Enter your Choice here: " ;
+
+
+	while (1){
+		//wait untill getting any notification from the menu task
+		xTaskNotifyWait(0,0,NULL,portMAX_DELAY );
+
+		//Print led menu
+		xQueueSend (q_print, &msg_led, portMAX_DELAY);
+
+		//wait for the next command
+		xTaskNotifyWait(0,0,&cmd_addr,portMAX_DELAY );
+		cmd = (command_t*) cmd_addr;
+
+		if(cmd->len <= 4){
+			if (! strcmp ((char*) cmd->payload, "none" ) ) led_effect_stop();
+
+			else if (! strcmp ((char*) cmd->payload, "e1" ) ) led_effect_1();
+			else if (! strcmp ((char*) cmd->payload, "e2" ) ) led_effect_2();
+			else if (! strcmp ((char*) cmd->payload, "e3" ) ) led_effect_3();
+			else if (! strcmp ((char*) cmd->payload, "e4" ) ) led_effect_4();
+			else xQueueSend (q_print, &msg_invalid, portMAX_DELAY);
+		} else xQueueSend (q_print, &msg_invalid, portMAX_DELAY);
+		//update state variable
+		current_state = sMainMenu;
+		//notify the menu task
+		xTaskNotify(menu_task_Handle,0, eNoAction );
+
+	}
+	}
+
+ void (RTC_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}

@@ -1,0 +1,10 @@
+20:22:21 **** Build of configuration Debug for project 002_Free_RTOS_Interuupts ****
+make -j12 all 
+arm-none-eabi-size  002_Free_RTOS_Interuupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+   9488	      8	  14176	  23672	   5c78	002_Free_RTOS_Interuupts.elf
+Finished building: default.size.stdout
+ 
+
+20:22:22 Build Finished. 0 errors, 0 warnings. (took 249ms)
+

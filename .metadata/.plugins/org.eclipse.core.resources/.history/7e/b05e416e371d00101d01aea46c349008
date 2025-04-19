@@ -1,0 +1,21 @@
+/*
+ * LED_Effects.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+
+void led_swap_forward_and_Reverse(int i){
+
+	if (i==0){
+		Write_GPIO(portC, 7, 0);
+		toggle_gpio (portC, i);
+
+	}
+	else if (i<=7){
+		toggle_gpio (portC, i-1);
+		toggle_gpio (portC, i);
+	}
+
+}

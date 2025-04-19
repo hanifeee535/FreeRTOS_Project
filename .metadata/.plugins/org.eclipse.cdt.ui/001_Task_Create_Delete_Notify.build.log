@@ -1,0 +1,10 @@
+20:22:21 **** Build of configuration Debug for project 001_Task_Create_Delete_Notify ****
+make -j12 all 
+arm-none-eabi-size  001_Task_Create_Delete_Notify.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8924	      8	  14176	  23108	   5a44	001_Task_Create_Delete_Notify.elf
+Finished building: default.size.stdout
+ 
+
+20:22:21 Build Finished. 0 errors, 0 warnings. (took 253ms)
+

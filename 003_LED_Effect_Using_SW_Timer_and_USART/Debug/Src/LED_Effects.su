@@ -1,0 +1,5 @@
+../Src/LED_Effects.c:23:6:led_stop	16	static
+../Src/LED_Effects.c:29:6:led_swap_forward_and_Reverse	16	static
+../Src/LED_Effects.c:44:6:led_swap_from_middle_to_edges	16	static
+../Src/LED_Effects.c:77:6:led_swap_from_edges_to_middle	16	static
+../Src/LED_Effects.c:117:6:led_timer_callback	16	static

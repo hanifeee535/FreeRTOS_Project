@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;FreeRTOS_STM32F103/Drivers/System_Clock_Config.c&apos; to &apos;System_Config.c&apos;" description="Rename resource &apos;System_Clock_Config.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/System_Clock_Config.c" name="System_Config.c" stamp="1744886923444" updateReferences="true"/>
+</session>

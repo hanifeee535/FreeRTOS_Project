@@ -1,0 +1,52 @@
+/*
+ * menue_handler.c
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+ void (Menu_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (Command_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (Print_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (LED_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}
+
+ void (RTC_Task_Handler) (void* parameters) {
+
+	while (1){
+
+
+	}
+	}

@@ -1,0 +1,10 @@
+01:00:38 **** Incremental Build of configuration Debug for project 003_LED_Effect_Using_SW_Timer_and_USART ****
+make -j12 all 
+arm-none-eabi-size  003_LED_Effect_Using_SW_Timer_and_USART.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19320	     52	  14244	  33616	   8350	003_LED_Effect_Using_SW_Timer_and_USART.elf
+Finished building: default.size.stdout
+ 
+
+01:00:39 Build Finished. 0 errors, 0 warnings. (took 149ms)
+

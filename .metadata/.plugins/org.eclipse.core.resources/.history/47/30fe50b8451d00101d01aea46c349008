@@ -1,0 +1,101 @@
+/*
+ * LED_Effects.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+uint8_t led_numbers = 9;
+uint8_t middle_led = 5;
+
+uint8_t current_led_number = 0;
+uint8_t effect = 1;
+
+
+void led_stop (){
+	for (int i = 0; i< led_numbers; i++){
+		Write_GPIO(portC, i, 0);
+	}
+}
+
+void led_swap_forward_and_Reverse(int i) {
+    static int previous = -1;
+
+    // Turn off the previous LED if valid
+    if (previous >= 0 && previous <= 8) {
+        Write_GPIO(portC, previous, 0);
+    }
+
+    // Turn on the current LED
+    Write_GPIO(portC, i, 1);
+
+    // Save current LED as previous for next round
+    previous = i;
+}
+
+void led_swap_from_middle_to_edges (int i){
+	static int right_previous = -1;
+	static int left_previous = -1;
+	static int right_next = -1;
+	static int left_next = -1;
+
+	if (i==5){
+		led_stop ();
+		Write_GPIO (portC, i,1);
+		right_previous = left_previous = i;
+		right_next = i+1;
+		left_next = i-1;
+
+	}
+
+	else if (i >= 6 && i <= 8){
+		Write_GPIO(portC, left_previous, 0);
+		Write_GPIO(portC, right_previous, 0);
+
+		Write_GPIO(portC, right_next, 1);
+		Write_GPIO(portC, left_next, 1);
+
+		left_previous = left_next;
+		right_previous = right_next;
+
+		right_next = right_next+1;
+		left_next = left_next-1;
+
+
+
+	}
+
+
+
+
+}
+
+void led_timer_callback (TimerHandle_t xTimer){
+	if (effect == 1){
+		led_swap_forward_and_Reverse (current_led_number);
+		current_led_number = (current_led_number+1) % led_numbers;
+	}
+
+	else if (effect == 2){
+		led_swap_forward_and_Reverse (current_led_number);
+		if (current_led_number == 0){
+		   current_led_number = led_numbers - 1;
+		}else{
+		   current_led_number--;
+		}
+	}
+	else if (effect == 3){
+		led_swap_from_middle_to_edges (middle_led);
+		middle_led = (middle_led+1) % led_numbers;
+
+	}
+
+
+}

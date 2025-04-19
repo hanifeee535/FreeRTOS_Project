@@ -1,0 +1,65 @@
+/*
+ * main.h
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+#include "String.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+
+typedef enum {
+	sMainMenu = 0,
+	sLEDEffect,
+	sRTCReport,
+	sRTCMenu,
+	sRTCTimeConfig,
+	sRTCDateConfig,
+
+}state_t;
+
+
+extern TaskHandle_t menu_task_Handle;
+extern TaskHandle_t commmand_task_Handle;
+extern TaskHandle_t print_task_Handle;
+extern TaskHandle_t led_task_Handle;
+extern TaskHandle_t rtc_task_Handle;
+extern QueueHandle_t q_data;
+extern QueueHandle_t q_print;
+extern TaskHandle_t NextTask_To_Handle;
+extern uint8_t status;
+extern const char *msg_invalid;
+
+
+const char *msg_invalid = "/////Invalid Message /////";
+
+//state variable
+extern state_t current_state = sMainMenu;
+
+
+typedef struct {
+	uint8_t payload [10];
+	uint32_t len;
+
+}command_t;
+
+
+
+ void (Menu_Task_Handler) (void* parameters);
+ void (Command_Task_Handler) (void* parameters);
+ void (Print_Task_Handler) (void* parameters);
+ void (LED_Task_Handler) (void* parameters);
+ void (RTC_Task_Handler) (void* parameters);
+ void led_effect_stop();
+ void led_effect_1();
+ void led_effect_2();
+ void led_effect_3();
+ void led_effect_4();
+
+
+

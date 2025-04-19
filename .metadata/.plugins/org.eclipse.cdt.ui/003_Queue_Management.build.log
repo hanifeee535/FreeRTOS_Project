@@ -1,0 +1,62 @@
+20:22:22 **** Incremental Build of configuration Debug for project 003_Queue_Management ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/led_effect.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32F103RBTx -DSTM32 -DSTM32F1 -DNUCLEO_F103RB -c -I../Inc -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Drivers" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/include" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/portable/GCC/ARM_CM3" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/led_effect.d" -MT"Src/led_effect.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/led_effect.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32F103RBTx -DSTM32 -DSTM32F1 -DNUCLEO_F103RB -c -I../Inc -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Drivers" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/include" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/portable/GCC/ARM_CM3" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/task_handler.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32F103RBTx -DSTM32 -DSTM32F1 -DNUCLEO_F103RB -c -I../Inc -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Drivers" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/include" -I"D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/portable/GCC/ARM_CM3" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/task_handler.d" -MT"Src/task_handler.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/task_handler.o"
+../Src/led_effect.c: In function 'led_effect_stop':
+../Src/led_effect.c:11:18: warning: implicit declaration of function 'xTimerStop' [-Wimplicit-function-declaration]
+   11 |                  xTimerStop(handle_led_timer[i], portMAX_DELAY);
+      |                  ^~~~~~~~~~
+../Src/led_effect.c:11:29: error: 'handle_led_timer' undeclared (first use in this function)
+   11 |                  xTimerStop(handle_led_timer[i], portMAX_DELAY);
+      |                             ^~~~~~~~~~~~~~~~
+../Src/led_effect.c:11:29: note: each undeclared identifier is reported only once for each function it appears in
+../Src/led_effect.c:11:50: error: 'portMAX_DELAY' undeclared (first use in this function)
+   11 |                  xTimerStop(handle_led_timer[i], portMAX_DELAY);
+      |                                                  ^~~~~~~~~~~~~
+../Src/led_effect.c: In function 'led_effect':
+../Src/led_effect.c:17:10: warning: implicit declaration of function 'xTimerStart' [-Wimplicit-function-declaration]
+   17 |          xTimerStart (handle_led_timer[n-1], portMAX_DELAY);
+      |          ^~~~~~~~~~~
+../Src/led_effect.c:17:23: error: 'handle_led_timer' undeclared (first use in this function)
+   17 |          xTimerStart (handle_led_timer[n-1], portMAX_DELAY);
+      |                       ^~~~~~~~~~~~~~~~
+../Src/led_effect.c:17:46: error: 'portMAX_DELAY' undeclared (first use in this function)
+   17 |          xTimerStart (handle_led_timer[n-1], portMAX_DELAY);
+      |                                              ^~~~~~~~~~~~~
+make: *** [Src/subdir.mk:34: Src/led_effect.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.c:49:1: error: unknown type name 'TimerHandle_t'; did you mean 'xTimerHandle'?
+   49 | TimerHandle_t handle_led_timer[4];
+      | ^~~~~~~~~~~~~
+      | xTimerHandle
+../Src/main.c:86:26: error: unknown type name 'TimerHandle_t'; did you mean 'xTimerHandle'?
+   86 | void led_timer_callback (TimerHandle_t xTimer){
+      |                          ^~~~~~~~~~~~~
+      |                          xTimerHandle
+../Src/main.c: In function 'main':
+../Src/main.c:155:30: warning: implicit declaration of function 'xTimerCreate'; did you mean 'xTaskCreate'? [-Wimplicit-function-declaration]
+  155 |         handle_led_timer[i]= xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE (void*)(i+1), led_timer_callback  );
+      |                              ^~~~~~~~~~~~
+      |                              xTaskCreate
+../Src/main.c:155:84: error: expected expression before 'void'
+  155 |         handle_led_timer[i]= xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE (void*)(i+1), led_timer_callback  );
+      |                                                                                    ^~~~
+In file included from D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/include/FreeRTOS.h:104,
+                 from ../Inc/main.h:14,
+                 from ../Src/main.c:29:
+D:/Embedded_C/FreeRTOS_STM32f103/003_Queue_Management/Third_Party/FreeRTOS/include/projdefs.h:53:50: error: called object is not a function or function pointer
+   53 | #define pdTRUE                                   ( ( BaseType_t ) 1 )
+      |                                                  ^
+../Src/main.c:155:76: note: in expansion of macro 'pdTRUE'
+  155 |         handle_led_timer[i]= xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE (void*)(i+1), led_timer_callback  );
+      |                                                                            ^~~~~~
+../Src/main.c:155:97: error: 'led_timer_callback' undeclared (first use in this function)
+  155 |         handle_led_timer[i]= xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE (void*)(i+1), led_timer_callback  );
+      |                                                                                                 ^~~~~~~~~~~~~~~~~~
+../Src/main.c:155:97: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Src/subdir.mk:34: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+20:22:23 Build Failed. 12 errors, 3 warnings. (took 656ms)
+

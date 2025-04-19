@@ -1,0 +1,5 @@
+../Src/main.c:39:14:Task1_Handler	2
+../Src/main.c:59:14:Task2_Handler	2
+../Src/main.c:80:14:Task3_Handler	2
+../Src/main.c:113:13:Task4_Handler	4
+../Src/main.c:133:5:main	5

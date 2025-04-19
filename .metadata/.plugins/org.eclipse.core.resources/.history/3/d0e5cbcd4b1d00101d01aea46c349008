@@ -1,0 +1,35 @@
+/*
+ * main.h
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "timers.h"
+
+extern TaskHandle_t menu_task_Handle;
+extern TaskHandle_t commmand_task_Handle;
+extern TaskHandle_t print_task_Handle;
+extern TaskHandle_t led_task_Handle;
+extern QueueHandle_t q_data;
+extern QueueHandle_t q_print;
+extern BaseType_t status;
+
+extern uint8_t led_numbers;
+extern TimerHandle_t handle_led_timer;
+
+
+
+void led_timer_callback (TimerHandle_t xTimer);
+
+
+#endif /* MAIN_H_ */

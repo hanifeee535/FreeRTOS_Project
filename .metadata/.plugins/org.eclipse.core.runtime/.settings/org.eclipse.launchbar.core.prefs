@@ -1,0 +1,9 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001_Task_Create_Delete_Notify,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_STM32F103,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:002_Free_RTOS_Interuupts,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:003_LED_Effect_Using_SW_Timer_and_USART
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001_Task_Create_Delete_Notify/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001_Task_Create_Delete_Notify/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_STM32F103/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_STM32F103/activeLaunchTarget=null\:---

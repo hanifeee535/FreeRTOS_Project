@@ -1,0 +1,35 @@
+/*
+ * LED_Effects.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: hanif
+ */
+
+#include "main.h"
+#include <stdint.h>
+#include "stm32f103Driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+void led_swap_forward_and_Reverse(int i){
+
+	if (i==0){
+		Write_GPIO(portC, 7, 0);
+		toggle_gpio (portC, i);
+
+	}
+	else if (i<=7){
+		toggle_gpio (portC, i-1);
+		toggle_gpio (portC, i);
+	}
+
+}
+
+
+void led_efffect_1 (){
+	for (int i = 0; i<led_numbers; i++){
+				led_swap_forward_and_Reverse(i);
+				delay_miliSecond(1, 100);
+			}
+}

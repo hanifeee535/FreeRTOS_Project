@@ -1,0 +1,23 @@
+/*
+ * led_effect.c
+ *
+ *  Created on: Apr 18, 2025
+ *      Author: hanif
+ */
+
+
+ void led_effect_stop(){
+
+ }
+ void led_effect_1(){
+
+ }
+ void led_effect_2(){
+
+ }
+ void led_effect_3(){
+
+ }
+ void led_effect_4(){
+
+ }

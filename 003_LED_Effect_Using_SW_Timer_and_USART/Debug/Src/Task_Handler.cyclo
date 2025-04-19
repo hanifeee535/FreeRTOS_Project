@@ -1,0 +1,4 @@
+../Src/Task_Handler.c:19:6:Command_Task_Handler	5
+../Src/Task_Handler.c:55:6:LED_Task_Handler	2
+../Src/Task_Handler.c:72:6:Menu_Task_Handler	2
+../Src/Task_Handler.c:105:6:Print_Task_Handler	2
